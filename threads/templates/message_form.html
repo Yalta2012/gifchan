@@ -1,0 +1,15 @@
+{% extends "base_layout.html" %}
+{%block title %} New thread {% endblock title %}
+{% block content %}
+	<h1>New message</h1>
+	
+	<p>Answer to: </p>
+	<div>
+		<form method="post" id='modal' enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form }}
+		<button type="submit">Send</button>
+		</form>
+	</div>
+
+{% endblock content %}

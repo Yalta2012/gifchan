@@ -1,0 +1,11 @@
+{% extends "base_layout.html" %}
+{%block title %} Homepage {% endblock title %}
+{% block content %}
+	<h1>Gifchan</h1>
+	<p>Пишите тут :3</p>
+	
+	{% for element in boards %}
+	<a href="{% url 'threads:board' slug=element.slug %}"><h2>{{element.title}}</h2></a>
+		<p>{{element.description}}</p>
+	{% endfor %}
+{% endblock content %}

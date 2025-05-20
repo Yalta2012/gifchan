@@ -1,0 +1,37 @@
+{% extends "base_layout.html" %}
+{%block title %} Thread {% endblock title %}
+{% block content %}
+	<a href="{% url 'threads:board' slug=thread.board.slug%}">Back</a>
+	<div>
+
+		<h1>{{thread.title}}</h1>
+		<h3>Post #{{thread.id}}<h3>
+		<p>{{thread.text}}</p>
+		{%if thread.image%}
+		<img src="{{thread.image.url}}" alt="">
+		{%endif%}
+		<p>by {{thread.author}}</p>
+		<data>{{thread.date}}</data>
+		<a href="{% url 'threads:create_message' slug=thread.board.slug id=thread.id %}">Responce</a>
+	</div>
+
+	<div>
+		{% for element in messages %}
+		<div class="message">
+			{%if element.prev_message %}
+				<h3>>>{{element.prev_message.id|stringformat:"06d" }}</h2>
+			{%else%}
+				<h3>>>OP</h3>
+			{%endif%}
+			<h3>#{{element.id|stringformat:"06d" }}</h3>
+			<p>{{element.text}}</p>
+			{%if element.image%}
+				<img src="{{element.image.url}}" alt="">
+			{%endif%}
+			<a href="{% url 'threads:create_message' slug=thread.board.slug id=thread.id message_id=element.id%}">Responce</a>
+
+		</div>
+		{% endfor %} 
+	</div>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{% block title %} Default title {% endblock title %}</title>
+
+		<body>
+			<header>Header</header>
+			{% if user.is_authenticated %}
+				<p>User: {{user.username}}</p>
+				{% csrf_token %}
+				<form action="{% url 'accounts:logout' %}" class="form" method="post">
+					{% csrf_token %}
+					<button type="submit">Logout</button>
+				</form> 
+				<a href="{% url 'accounts:change_password' %}">Change Password</a>
+
+			{% else %}
+				<a href="{% url 'accounts:login' %}">Login</a>
+				<a href="{% url 'accounts:signup' %}">Signup</a>
+			{% endif %}
+
+			{% block content %}
+			{% endblock content %}
+
+			<script src="{% static 'scripts/message_form.js' %}"></script>
+
+		</body>
+	</head>
+</html>

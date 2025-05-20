@@ -1,0 +1,20 @@
+{% extends "base_layout.html" %}
+{%block title %} Homepage {% endblock title %}
+{% block content %}
+	<h1>Доска: {{board.title}}</h1>
+	<p>{{board.description}}</p>
+	<a href="{% url 'homepage' %}">На главную</a>
+	<a href="{% url 'threads:create_thread' slug=board.slug%}">New thread</a>
+	{% for element in threads %}
+	<div class="thread">
+
+		<a href="{% url 'threads:thread' slug=board.slug id=element.id%}"><h2>{{element.title}}</h2></a>
+		<p>{{element.snippet}}</p>
+		{%if element.image%}
+		<img src="{{element.image.url}}" alt="">
+		{%endif%}
+		<p>by {{element.author}}</p>
+		<data>{{element.date}}</data>
+	</div>
+	{% endfor %}
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% extends "base_layout.html" %}
+{%block title %} New thread {% endblock title %}
+{% block content %}
+	<h1>New thread</h1>
+	<form method="post" enctype="multipart/form-data" class="form">
+		{% csrf_token %}
+		{{ form }}
+		<button type="submit">Create</button>
+	</form>
+{% endblock content %}
